@@ -8,18 +8,16 @@ namespace Swarm
     {
         public static int Initialize(string unused)
         {
-            // AppDomain.CurrentDomain.AssemblyResolve += Current_Resolver;
-
-            AppDomain.CurrentDomain.SetData("APPBASE", Directory.GetCurrentDirectory());
+            AppDomain.CurrentDomain.AssemblyResolve += Current_Resolver;
 
             return 0;
         }
 
         static Assembly Current_Resolver(object sender, ResolveEventArgs args)
         {
-            if (args.Name.Contains("AInterface"))
+            if (args.Name.Contains("AgentInterface"))
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "AInterface.dll");
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "AgentInterface.dll");
 
                 return Assembly.LoadFrom(path);
             }
